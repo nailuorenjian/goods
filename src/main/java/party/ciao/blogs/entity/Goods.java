@@ -1,6 +1,7 @@
 package party.ciao.blogs.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -37,6 +38,7 @@ public class Goods implements Serializable {
     /**
      * 分类
      */
+    @TableField("goodsType")
     private Integer goodsType;
 
     /**

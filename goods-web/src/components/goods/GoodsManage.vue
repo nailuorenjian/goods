@@ -9,9 +9,16 @@
     <el-table :data="tableData">
       <el-table-column prop="id" label="ID" width="60">
       </el-table-column>
-      <el-table-column prop="name" label="goods type 名" width="110">
+      <el-table-column prop="name" label="goods名" width="110">
       </el-table-column>
       <el-table-column prop="remark" label="remark名" width="110">
+      </el-table-column>
+
+      <el-table-column prop="storage" label="storage" width="110">
+      </el-table-column>
+      <el-table-column prop="goodsType" label="goodsType" width="110">
+      </el-table-column>
+      <el-table-column prop="count" label="count" width="110">
       </el-table-column>
 
       <el-table-column prop="operate" label="operate" width="150">
@@ -59,6 +66,24 @@
           </el-col>
         </el-form-item>
 
+        <el-form-item label="storage" prop="storage">
+          <el-col :span="20">
+            <el-input type="textarea" v-model="form.storage"></el-input>
+          </el-col>
+        </el-form-item>
+
+        <el-form-item label="goodsType" prop="goodsType">
+          <el-col :span="20">
+            <el-input type="textarea" v-model="form.goodsType"></el-input>
+          </el-col>
+        </el-form-item>
+
+        <el-form-item label="count" prop="count">
+          <el-col :span="20">
+            <el-input type="textarea" v-model="form.count"></el-input>
+          </el-col>
+        </el-form-item>
+
       </el-form>
 
       <span slot="footer" class="dialog-footer">
@@ -72,7 +97,7 @@
 
 <script>
 export default {
-  name: "GoodstypeManage",
+  name: "GoodsManage",
   data() {
 
     return {
@@ -85,7 +110,10 @@ export default {
       form:{
         name:'',
         no:'',
-        remark:''
+        remark:'',
+        storage:'',
+        goodsType:'',
+        count:''
       },
 
       // 校验
@@ -107,7 +135,7 @@ export default {
     // 删除数据
     del(id){
       console.log(id)
-      this.$axios.get(this.$httpUrl + '/goodstype/delete?id=' + id).then(res => res.data).then(res => {
+      this.$axios.get(this.$httpUrl + '/goods/delete?id=' + id).then(res => res.data).then(res => {
         if (res.code == 200) {
           this.$message({
             message: '操作成功！',
@@ -135,6 +163,9 @@ export default {
         this.form.id = row.id
         this.form.name = row.name
         this.form.remark = row.remark
+        this.form.storage = row.storage
+        this.form.goodsType = row.goodsType
+        this.form.count = row.count
       })
 
     },
@@ -144,11 +175,13 @@ export default {
       this.centerDialogVisible = true;
       this.$nextTick(()=>{
         this.resetForm()
+
+        this.form.id = ''
       })
     },
 
     doSave() {
-      this.$axios.post(this.$httpUrl + '/goodstype/save', this.form).then(res => res.data).then(res => {
+      this.$axios.post(this.$httpUrl + '/goods/save', this.form).then(res => res.data).then(res => {
         if (res.code == 200) {
           this.$message({
             message: '操作成功！',
@@ -167,7 +200,7 @@ export default {
     },
 
     doMod() {
-      this.$axios.post(this.$httpUrl + '/goodstype/update', this.form).then(res => res.data).then(res => {
+      this.$axios.post(this.$httpUrl + '/goods/update', this.form).then(res => res.data).then(res => {
         console.log(res)
         if (res.code == 200) {
           this.$message({
@@ -214,7 +247,7 @@ export default {
 
     // 获取list
     loadPost() {
-      this.$axios.post(this.$httpUrl + '/goodstype/listPageC1',{
+      this.$axios.post(this.$httpUrl + '/goods/listPageC1',{
         pageSize:this.pageSize,
         pageNum:this.pageNum,
         param:{
