@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import party.ciao.blogs.common.QueryPageParam;
 import party.ciao.blogs.common.Result;
+import party.ciao.blogs.entity.Goods;
 import party.ciao.blogs.entity.Storage;
 import party.ciao.blogs.service.IStorageService;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -66,6 +68,13 @@ public class StorageController {
         IPage result = storageService.pageCC(page, lambdaQueryWrapper);
 
         return Result.suc(result.getRecords(), result.getTotal());
+    }
+
+    // 获取仓库的所有数据
+    @RequestMapping("/list")
+    public Result list(){
+        List list = storageService.list();
+        return Result.suc(list);
     }
 
 

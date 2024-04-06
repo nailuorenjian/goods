@@ -15,6 +15,7 @@ import party.ciao.blogs.service.IGoodstypeService;
 import party.ciao.blogs.service.IStorageService;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -67,5 +68,11 @@ public class GoodstypeController {
         IPage result = goodstypeService.pageCC(page, lambdaQueryWrapper);
 
         return Result.suc(result.getRecords(), result.getTotal());
+    }
+
+    @RequestMapping("/list")
+    public Result list(){
+        List list = goodstypeService.list();
+        return Result.suc(list);
     }
 }

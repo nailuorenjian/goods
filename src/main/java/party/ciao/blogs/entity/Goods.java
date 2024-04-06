@@ -4,6 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.io.Serializable;
 
 /**
@@ -15,6 +19,9 @@ import java.io.Serializable;
  * @since 2024-03-26
  */
 @TableName("goods")
+@Data
+@EqualsAndHashCode(callSuper = false)
+@ToString
 public class Goods implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,58 +58,5 @@ public class Goods implements Serializable {
      */
     private String remark;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    public Integer getStorage() {
-        return storage;
-    }
-
-    public void setStorage(Integer storage) {
-        this.storage = storage;
-    }
-    public Integer getGoodsType() {
-        return goodsType;
-    }
-
-    public void setGoodsType(Integer goodsType) {
-        this.goodsType = goodsType;
-    }
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    @Override
-    public String toString() {
-        return "Goods{" +
-            "id=" + id +
-            ", name=" + name +
-            ", storage=" + storage +
-            ", goodsType=" + goodsType +
-            ", count=" + count +
-            ", remark=" + remark +
-        "}";
-    }
 }
