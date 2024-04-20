@@ -1,6 +1,7 @@
 import vue from 'vue'
 import Vuex from 'vuex'
 import router, {resetRouter} from "../router";
+import createPersistedState from 'vuex-persistedstate';
 vue.use(Vuex)
 
 function addNewRoute(menuList) {
@@ -36,13 +37,15 @@ export default new Vuex.Store({
     mutations:{
         setMenu(state,menuList){
             state.menu = menuList
-
+            // 添加路由
             addNewRoute(menuList)
         }
     },
     getters:{
         getMenu(state){
-            return state.menu
+            return state.menu;
         }
-    }
+    },
+    // 插件，防止刷新后，丢失菜单数据
+    plugins: [createPersistedState()]
 })
